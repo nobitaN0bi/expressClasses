@@ -13,7 +13,14 @@ app.get('/courses', (req, res) => {
     console.log('done');
     res.json(courses); 
 });
-
+// Read courses from JSON file
+fs.readFile('courses.json', 'utf8', (err, data) => {
+    if (err) {
+        console.log(`Error reading file from disk: ${err}`);
+    } else {
+        courses = JSON.parse(data);
+    }
+});
 app.post('/courses', (req, res) => {
     console.log(req.body);
     let singleCourse = {
